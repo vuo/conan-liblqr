@@ -14,8 +14,7 @@ class LiblqrConan(ConanFile):
 
     def source(self):
         tools.get('https://github.com/carlobaldassi/liblqr/archive/v%s.tar.gz' % self.version,
-                  # sha256='1019a2d91f3935f1f817eb204a51ec977a060d39704c6dafa183b110fd6280b0'
-                  )
+                  sha256='1019a2d91f3935f1f817eb204a51ec977a060d39704c6dafa183b110fd6280b0')
 
     def imports(self):
         self.copy('*.dylib', '', 'lib')
