@@ -4,20 +4,20 @@ import shutil
 class LiblqrConan(ConanFile):
     name = 'liblqr'
 
-    sourceVersion = '0.4.2'
-    vuoPackageVersion = '2'
-    version = '%s-%s' % (sourceVersion, vuoPackageVersion)
+    source_version = '0.4.2'
+    package_version = '3'
+    version = '%s-%s' % (source_version, package_version)
 
-    requires = 'glib/2.51.1-2@vuo/stable'
+    requires = 'glib/2.51.1-3@vuo/stable'
     settings = 'os', 'compiler', 'build_type', 'arch'
     url = 'https://github.com/vuo/conan-liblqr'
     license = 'https://github.com/carlobaldassi/liblqr/blob/master/COPYING.LESSER'
     description = 'A C/C++ API for performing non-uniform resizing of images by the seam-carving technique'
-    source_dir = 'liblqr-%s' % sourceVersion
+    source_dir = 'liblqr-%s' % source_version
     build_dir = '_build'
 
     def source(self):
-        tools.get('https://github.com/carlobaldassi/liblqr/archive/v%s.tar.gz' % self.sourceVersion,
+        tools.get('https://github.com/carlobaldassi/liblqr/archive/v%s.tar.gz' % self.source_version,
                   sha256='1019a2d91f3935f1f817eb204a51ec977a060d39704c6dafa183b110fd6280b0')
 
     def imports(self):
@@ -28,7 +28,7 @@ class LiblqrConan(ConanFile):
         with tools.chdir(self.build_dir):
             autotools = AutoToolsBuildEnvironment(self)
             autotools.flags.append('-Oz')
-            autotools.flags.append('-mmacosx-version-min=10.8')
+            autotools.flags.append('-mmacosx-version-min=10.10')
             autotools.link_flags.append('-Wl,-rpath,@loader_path')
             autotools.link_flags.append('-Wl,-install_name,@rpath/liblqr.dylib')
 
