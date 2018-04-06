@@ -20,6 +20,8 @@ class LiblqrConan(ConanFile):
         tools.get('https://github.com/carlobaldassi/liblqr/archive/v%s.tar.gz' % self.source_version,
                   sha256='1019a2d91f3935f1f817eb204a51ec977a060d39704c6dafa183b110fd6280b0')
 
+        self.run('mv %s/COPYING.LESSER %s/%s.txt' % (self.source_dir, self.source_dir, self.name))
+
     def imports(self):
         self.copy('*.dylib', self.build_dir, 'lib')
 
@@ -45,6 +47,8 @@ class LiblqrConan(ConanFile):
     def package(self):
         self.copy('*.h', src='%s/include/lqr-1' % self.build_dir, dst='include')
         self.copy('liblqr.dylib', src='%s/lqr/.libs' % self.build_dir, dst='lib')
+
+        self.copy('%s.txt' % self.name, src=self.source_dir, dst='license')
 
     def package_info(self):
         self.cpp_info.libs = ['lqr']
