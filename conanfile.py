@@ -64,8 +64,7 @@ class LiblqrConan(ConanFile):
             if platform.system() == 'Darwin':
                 shutil.move('lqr/.libs/liblqr-1.0.dylib', 'lqr/.libs/liblqr.dylib')
             elif platform.system() == 'Linux':
-                self.run('ls -lR')
-                shutil.move('lqr/.libs/liblqr.so.0.1.0', 'lqr/.libs/liblqr.so')
+                shutil.move('lib/liblqr-1.so.0.3.2', 'lib/liblqr.so')
                 patchelf = self.deps_cpp_info['patchelf'].rootpath + '/bin/patchelf'
                 self.run('%s --set-soname liblqr.so lib/liblqr.so' % patchelf)
 
@@ -79,6 +78,7 @@ class LiblqrConan(ConanFile):
 
         self.copy('*.h', src='%s/include/lqr-1' % self.build_dir, dst='include')
         self.copy('liblqr.%s' % libext, src='%s/lqr/.libs' % self.build_dir, dst='lib')
+        self.copy('liblqr.%s' % libext, src='%s/lib' % self.build_dir, dst='lib')
 
         self.copy('%s.txt' % self.name, src=self.source_dir, dst='license')
 
