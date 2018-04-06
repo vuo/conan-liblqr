@@ -5,7 +5,7 @@ class LiblqrConan(ConanFile):
     name = 'liblqr'
 
     source_version = '0.4.2'
-    package_version = '3'
+    package_version = '4'
     version = '%s-%s' % (source_version, package_version)
 
     requires = 'glib/2.51.1-3@vuo/stable'
